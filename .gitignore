@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+
+# Large image data
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+*.zip
+
+# Trained model files
+*.pth
+*.pt
+*.onnx
+
+# Result folders
+result/
+results/
+runs/
+outputs/
+
+# VS Code settings
+.vscode/
+
+# Secret files
+.env
