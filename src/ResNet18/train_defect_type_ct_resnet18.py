@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 # 1. 기본 설정
 # =========================
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # "Exterior" 또는 "CT"
 DATA_TYPE = "CT"
