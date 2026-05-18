@@ -1,0 +1,5 @@
+﻿battery_id,inspection_type,result,risk_score,completed_at,operator,line,confidence,defect_summary,recommendation,model_version
+B-001,외관 검사,불량,82,2026-05-14 22:07,demo_user,전체 라인,92,"Swelling 의심, 표면 찌그러짐 감지, 배터리 외벽 손상",격리 보관 후 원인 분석 및 교체 권장,Exterior-CNN-v1
+CT-001,CT 내부검사,불량,76,2026-05-14 22:07,demo_user,전체 라인,94,"전극 정렬 이상, 내부 공극 이상, 분리막 변형 의심",정밀 재검사 후 셀 격리 및 원인 분석 권장,CT-CNN-v1
+CT-001,CT 내부검사,불량,76,2026-05-14 22:09,demo_user,전체 라인,94,"전극 정렬 이상, 내부 공극 이상, 분리막 변형 의심",정밀 재검사 후 셀 격리 및 원인 분석 권장,CT-CNN-v1
+B-001,외관 검사,불량,82,2026-05-18 09:39,1,전체 라인,92,"Swelling 의심, 표면 찌그러짐 감지",교체 권장,v1
