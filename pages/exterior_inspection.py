@@ -1,3 +1,4 @@
+from pathlib import Path
 import base64
 import textwrap
 from datetime import datetime
@@ -295,6 +296,14 @@ def save_exterior_record(uploaded_file, selected_line, parsed):
     now = datetime.now()
     battery_id = f"B-{len(st.session_state.inspection_history) + 1:03d}"
     operator_id = str(st.session_state.get("user_id", "1"))
+    
+    report_image_dir = Path("data/report_images")
+    report_image_dir.mkdir(parents=True, exist_ok=True)
+
+    image_path = report_image_dir / f"{battery_id}_{uploaded_file.name}"
+
+    with open(image_path, "wb") as f:
+        f.write(uploaded_file.getvalue())
 
     record = {
         "배터리 ID": battery_id,
@@ -321,6 +330,7 @@ def save_exterior_record(uploaded_file, selected_line, parsed):
         defect_summary=parsed["defect_summary"],
         recommendation=parsed["recommendation"],
         model_version="Custom Vision - battery_out",
+        image_path=str(image_path),
     )
 
     return battery_id

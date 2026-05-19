@@ -46,6 +46,9 @@ REPORT_COLUMNS = [
     "defect_summary",
     "recommendation",
     "model_version",
+    "image_path",
+    "heatmap_path",
+    "overlay_path",
 ]
 
 os.makedirs(REPORT_DIR, exist_ok=True)

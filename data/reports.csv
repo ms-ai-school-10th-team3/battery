@@ -51,3 +51,8 @@ B-002,외관 검사,정상,0,2026-05-20 04:41,demo_user,전체 라인,0.9996214,
 B-003,외관 검사,불량,81,2026-05-20 04:42,demo_user,전체 라인,0.8125979,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out,,,
 B-004,외관 검사,불량,83,2026-05-20 04:43,demo_user,전체 라인,0.83355486,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out,,,
 B-001,외관 검사,불량,83,2026-05-20 05:09,demo_user,전체 라인,83.35,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out,,,
+CT-001,CT 내부검사,정상,0,2026-05-20 05:24,demo_user,전체 라인,85.0,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet,,,C:\Users\EL072\Desktop\battery_front_back\ai_models\deeplab_mobilenet\results\2026-05-20\25\overlay.png
+B-001,외관 검사,불량,84,2026-05-20 05:27,demo_user,전체 라인,83.92,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out,data\report_images\B-001_RGB_cell_cylindrical_0001_220.png,,
+CT-001,CT 내부검사,정상,0,2026-05-20 05:27,demo_user,전체 라인,85.0,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet,,,C:\Users\EL072\Desktop\battery_front_back\ai_models\deeplab_mobilenet\results\2026-05-20\26\overlay.png
+B-001,외관 검사,불량,83,2026-05-20 05:30,demo_user,전체 라인,82.82,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out,data\report_images\B-001_RGB_cell_cylindrical_0001_200.png,,
+CT-001,CT 내부검사,불량,19,2026-05-20 05:30,demo_user,전체 라인,94.0,resin_overflow,정밀 재검사 필요,DeepLabV3Plus-MobileNet,,,C:\Users\EL072\Desktop\battery_front_back\ai_models\deeplab_mobilenet\results\2026-05-20\27\overlay.png

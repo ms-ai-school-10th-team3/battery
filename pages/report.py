@@ -45,6 +45,9 @@ REPORT_COLUMNS = [
     "defect_summary",
     "recommendation",
     "model_version",
+    "image_path",
+    "heatmap_path",
+    "overlay_path",
 ]
 
 
@@ -536,11 +539,11 @@ left, right = st.columns([2.4, 1])
 
 with left:
     image_url = report.get("image_url", "")
-    heatmap_url = report.get("heatmap_url", "")
     image_path = report.get("image_path", "")
+    overlay_path = report.get("overlay_path", "")
 
-    if isinstance(heatmap_url, str) and heatmap_url.strip():
-        st.image(heatmap_url, use_container_width=True)
+    if isinstance(overlay_path, str) and overlay_path.strip() and os.path.exists(overlay_path):
+        st.image(overlay_path, use_container_width=True)
 
     elif isinstance(image_url, str) and image_url.strip():
         st.image(image_url, use_container_width=True)
@@ -552,8 +555,8 @@ with left:
         st.markdown(
             """
             <div class="image-placeholder">
-                원본 이미지 / AI 검출 이미지 / Heatmap 영역<br>
-                API 연결 후 image_url 또는 heatmap_url을 받아 표시
+                원본 이미지 / AI 검출 시각화 영역<br>
+                검사 이미지 또는 AI overlay 결과를 표시합니다.
             </div>
             """,
             unsafe_allow_html=True,

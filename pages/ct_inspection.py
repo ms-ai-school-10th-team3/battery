@@ -282,6 +282,12 @@ def save_ct_record(uploaded_file, selected_line, result):
     defect_ratios = judgement.get("defect_ratios", {})
     risk_score = int(round(sum(float(v) for v in defect_ratios.values())))
     risk_score = min(max(risk_score, 0), 100)
+    
+    overlay_path = ""
+
+    overlay_rel_path = result.get("files", {}).get("overlay")
+    if overlay_rel_path:
+        overlay_path = str(DEEPLAB_DIR / overlay_rel_path)
 
     confidence = 0.94 if abnormal else 0.85
 
@@ -311,6 +317,7 @@ def save_ct_record(uploaded_file, selected_line, result):
         defect_summary=defect_summary,
         recommendation="정밀 재검사 필요" if abnormal else "정상 판정. 다음 공정 진행 가능",
         model_version="DeepLabV3Plus-MobileNet",
+        overlay_path=overlay_path,
     )
 
 
