@@ -42,3 +42,7 @@ CT-004,CT 내부검사,불량,1,2026-05-20 03:13,demo_user,전체 라인,0.94,po
 CT-001,CT 내부검사,불량,3,2026-05-20 03:27,demo_user,전체 라인,0.94,resin_overflow,정밀 재검사 필요,DeepLabV3Plus-MobileNet
 B-001,외관 검사,불량,36,2026-05-20 03:32,demo_user,전체 라인,0.36492887,Pollution 결함 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
 CT-001,CT 내부검사,불량,1,2026-05-20 03:32,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+B-002,외관 검사,불량,80,2026-05-20 04:00,demo_user,전체 라인,0.8008434,Swelling 결함 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
+B-001,외관 검사,불량,78,2026-05-20 04:08,demo_user,전체 라인,0.78832734,Swelling 결함 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
+B-001,외관 검사,불량,84,2026-05-20 04:18,demo_user,전체 라인,0.8392328,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
+B-001,외관 검사,불량,78,2026-05-20 04:25,demo_user,전체 라인,0.7784622,스웰링 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
