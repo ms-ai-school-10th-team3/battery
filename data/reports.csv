@@ -21,3 +21,21 @@ B-001,외관 검사,불량,49,2026-05-20 01:28,demo_user,전체 라인,0.4978669
 CT-001,CT 내부검사,정상,0,2026-05-20 01:28,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
 CT-001,CT 내부검사,정상,0,2026-05-20 01:44,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
 CT-002,CT 내부검사,정상,0,2026-05-20 01:44,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-001,CT 내부검사,정상,0,2026-05-20 01:53,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-002,CT 내부검사,정상,0,2026-05-20 01:54,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-003,CT 내부검사,정상,0,2026-05-20 01:55,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-004,CT 내부검사,불량,3,2026-05-20 01:59,demo_user,전체 라인,0.94,resin_overflow,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-001,CT 내부검사,정상,0,2026-05-20 02:51,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-002,CT 내부검사,불량,11,2026-05-20 02:52,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-003,CT 내부검사,불량,10,2026-05-20 02:52,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-004,CT 내부검사,불량,10,2026-05-20 02:53,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-005,CT 내부검사,불량,1,2026-05-20 02:53,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-001,CT 내부검사,정상,0,2026-05-20 03:00,demo_user,전체 라인,0.85,주요 결함 없음,정상 판정. 다음 공정 진행 가능,DeepLabV3Plus-MobileNet
+CT-002,CT 내부검사,불량,3,2026-05-20 03:01,demo_user,전체 라인,0.94,resin_overflow,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+B-001,외관 검사,불량,54,2026-05-20 03:09,demo_user,전체 라인,0.54296494,Swelling 결함 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
+CT-001,CT 내부검사,불량,11,2026-05-20 03:10,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+B-001,외관 검사,불량,54,2026-05-20 03:12,demo_user,전체 라인,0.54296494,Swelling 결함 가능성 감지,정밀 재검사 필요,Custom Vision - battery_out
+CT-001,CT 내부검사,불량,11,2026-05-20 03:12,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-002,CT 내부검사,불량,10,2026-05-20 03:13,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-003,CT 내부검사,불량,10,2026-05-20 03:13,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
+CT-004,CT 내부검사,불량,1,2026-05-20 03:13,demo_user,전체 라인,0.94,porosity,정밀 재검사 필요,DeepLabV3Plus-MobileNet
