@@ -241,25 +241,6 @@ div[data-testid="stSidebarUserContent"] div.stPageLink a:hover {
     font-weight: 600;
 }
 
-div.logout-btn-wrap div.stButton > button {
-    width: 100% !important;
-    height: 42px !important;
-    border: 1px solid #E5EAF3 !important;
-    border-radius: 12px !important;
-    background: #FFFFFF !important;
-    color: #475569 !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    box-shadow: none !important;
-    margin-top: 12px;
-}
-
-div.logout-btn-wrap div.stButton > button:hover {
-    border-color: #3B82F6 !important;
-    color: #3B82F6 !important;
-    background: #F8FAFC !important;
-}
-
 .main-title {
     font-size: 34px;
     font-weight: 950;
@@ -368,10 +349,46 @@ div.logout-btn-wrap div.stButton > button:hover {
     margin-bottom: 18px;
 }
 
-.stButton > button {
-    height: 42px;
-    border-radius: 10px;
-    font-weight: 850;
+/* 전체 버튼 기본 스타일 */
+div.stButton > button {
+    height: 42px !important;
+    border-radius: 10px !important;
+    font-weight: 850 !important;
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: none !important;
+}
+
+div.stButton > button:hover {
+    background-color: #EFF6FF !important;
+    color: #0B63FF !important;
+    border-color: #93C5FD !important;
+}
+
+/* 로그아웃 버튼 */
+div.logout-btn-wrap div.stButton > button {
+    width: 100% !important;
+    height: 42px !important;
+    border: 1px solid #E5EAF3 !important;
+    border-radius: 12px !important;
+    background: #FFFFFF !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    box-shadow: none !important;
+    margin-top: 12px;
+}
+
+div.logout-btn-wrap div.stButton > button:hover {
+    border-color: #3B82F6 !important;
+    color: #3B82F6 !important;
+    background: #F8FAFC !important;
+}
+
+/* 닫기 버튼 강조 */
+div[data-testid="column"]:last-child div.stButton > button {
+    font-size: 18px !important;
 }
 </style>
 """)
@@ -423,8 +440,11 @@ report = get_selected_report()
 if report is None:
     st.warning("선택된 보고서가 없습니다. 검사 이력 페이지에서 보고서를 선택해주세요.")
 
-    if st.button("← 검사 이력으로 돌아가기"):
-        st.switch_page("pages/inspection_report.py")
+    nav1, nav2 = st.columns([1, 5])
+
+    with nav1:
+        if st.button("← 이력으로", key="btn_empty_back"):
+            st.switch_page("pages/inspection_report.py")
 
     st.stop()
 
@@ -432,8 +452,15 @@ if report is None:
 # =========================
 # Main Header
 # =========================
-if st.button("← 전체 보고서 이력"):
-    st.switch_page("pages/inspection_report.py")
+top_nav_left, top_nav_right = st.columns([6, 1])
+
+with top_nav_left:
+    if st.button("← 보고서 이력으로 돌아가기", key="btn_back_to_reports"):
+        st.switch_page("pages/inspection_report.py")
+
+with top_nav_right:
+    if st.button("✕ 닫기", key="btn_close_report", use_container_width=True):
+        st.switch_page("pages/inspection_report.py")
 
 st.markdown('<div class="main-title">AI 배터리 검사 상세 보고서</div>', unsafe_allow_html=True)
 
