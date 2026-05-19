@@ -48,9 +48,6 @@ if "ct_memo_text" not in st.session_state:
 if "ct_history" not in st.session_state:
     st.session_state.ct_history = []
 
-if "ct_activity_logs" not in st.session_state:
-    st.session_state.ct_activity_logs = []
-
 if "ct_saved_upload_signature" not in st.session_state:
     st.session_state.ct_saved_upload_signature = None
     
@@ -301,16 +298,7 @@ def save_ct_record(uploaded_file, selected_line, result):
         "라인": selected_line,
     }
 
-    log = {
-        "시간": now.strftime("%H:%M"),
-        "내용": f"{ct_id} 검사 완료",
-        "판정 결과": final_result,
-        "신뢰도": f"{int(confidence * 100)}%",
-        "작업자": operator,
-    }
-
     st.session_state.ct_history.insert(0, record)
-    st.session_state.ct_activity_logs.insert(0, log)
 
     save_inspection_report(
         battery_id=ct_id,
@@ -704,41 +692,6 @@ def render_history_table(df):
     )
 
 
-def render_log_box():
-    html("""
-    <div class="section-card">
-        <div class="section-head">
-            <div class="section-title">활동 로그 / 메모</div>
-            <div class="link-text">✎ 메모 작성</div>
-        </div>
-    """)
-
-    if not st.session_state.ct_activity_logs:
-        html("""
-        <div class="empty-box">아직 활동 로그가 없습니다.</div>
-        </div>
-        """)
-        return
-    html("</div>")
-
-    h1, h2, h3, h4, h5 = st.columns([0.8, 1.8, 1, 1, 1])
-    with h1: html('<div class="log-table-head">시간</div>')
-    with h2: html('<div class="log-table-head">내용</div>')
-    with h3: html('<div class="log-table-head">판정</div>')
-    with h4: html('<div class="log-table-head">신뢰도</div>')
-    with h5: html('<div class="log-table-head">작업자</div>')
-
-    for log in st.session_state.ct_activity_logs:
-        c1, c2, c3, c4, c5 = st.columns([0.8, 1.8, 1, 1, 1])
-        with c1: html(f'<div class="log-cell">{log["시간"]}</div>')
-        with c2: html(f'<div class="log-cell">{log["내용"]}</div>')
-        with c3:
-            if log["판정 결과"] == "불량": st.error(log["판정 결과"])
-            else: st.success(log["판정 결과"])
-        with c4: html(f'<div class="log-cell">{log["신뢰도"]}</div>')
-        with c5: html(f'<div class="log-cell">{log["작업자"]}</div>')
-
-
 # ==================================================
 # 👥 2. 왼쪽 고정 사이드바 조립 영역 (첫 번째 페이지 방식으로 전면 통일)
 # ==================================================
@@ -841,7 +794,7 @@ with main_left:
 
                 save_ct_record(uploaded_file, selected_line, result)
 
-                st.success("AI 분석이 완료되었습니다. 최근 CT 검사 이력, 활동 로그, 보고서에 저장되었습니다.")
+                st.success("AI 분석이 완료되었습니다. 최근 CT 검사 이력과 보고서에 저장되었습니다.")
 
             except Exception as e:
                 st.session_state.ct_analysis_done = False
@@ -872,14 +825,4 @@ else:
             filtered_df["파일명"].str.contains(search_id.strip(), case=False, na=False)
         ]
 
-bottom_left, bottom_right = st.columns([1, 1])
-with bottom_left:
-    render_history_table(filtered_df)
-
-with bottom_right:
-    render_log_box()
-    with st.expander("메모 작성하기"):
-        st.session_state.ct_memo_text = st.text_area("메모", value=st.session_state.ct_memo_text, placeholder="CT 검사 관련 메모를 입력하세요.", height=120)
-        if st.button("메모 저장", key="ct_memo_save_btn"):
-            if st.session_state.ct_memo_text.strip(): st.success("메모가 저장되었습니다.")
-            else: st.warning("메모 내용을 입력해주세요.")
+render_history_table(filtered_df)
