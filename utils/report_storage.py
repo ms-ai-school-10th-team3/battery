@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 
@@ -97,7 +98,7 @@ def save_inspection_report(
         "inspection_type": inspection_type,
         "result": result,
         "risk_score": risk_score,
-        "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "completed_at": datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d %H:%M"),
         "operator": operator,
         "line": line,
         "confidence": round(float(confidence) * 100, 2) if float(confidence) <= 1 else round(float(confidence), 2),
