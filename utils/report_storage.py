@@ -3,7 +3,12 @@ from datetime import datetime
 
 import pandas as pd
 
-REPORT_DIR = "data"
+# Azure App Service에서는 /home 경로가 저장용으로 더 안전함
+if os.path.exists("/home"):
+    REPORT_DIR = "/home/data"
+else:
+    REPORT_DIR = "data"
+
 REPORT_PATH = os.path.join(REPORT_DIR, "reports.csv")
 
 REPORT_COLUMNS = [
@@ -110,6 +115,7 @@ def save_inspection_report(
     df = df[REPORT_COLUMNS]
 
     df.to_csv(REPORT_PATH, index=False, encoding="utf-8-sig")
+    print(f"[REPORT SAVE] path={REPORT_PATH}, rows={len(df)}")
 
 
 # 💡 불러오기 함수 새로 추가!

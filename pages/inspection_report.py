@@ -32,8 +32,8 @@ def html(code):
 # =========================
 # Constants
 # =========================
-REPORT_DIR = "data"
-REPORT_PATH = os.path.join(REPORT_DIR, "reports.csv")
+REPORT_DIR = report_storage.REPORT_DIR
+REPORT_PATH = report_storage.REPORT_PATH
 
 REPORT_COLUMNS = [
     "battery_id",
@@ -156,6 +156,8 @@ with st.sidebar:
 st.markdown('<div class="main-title">검사 이력 및 보고서</div><div class="sub-title">데이터를 필터링하고 관리자용 보고서(CSV/Excel)를 추출합니다.</div>', unsafe_allow_html=True)
 
 reports_df = report_storage.load_reports()
+st.caption(f"DEBUG REPORT PATH: {report_storage.REPORT_PATH}")
+st.caption(f"DEBUG REPORT COUNT: {len(reports_df)}")
 
 # Filter
 filter_box = st.container(border=True)
