@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b850d62a-25fe-4d3a-9697-ea40449528a9/resourceGroups/10ai_1st_team3/providers/Microsoft.Web/sites/battery-team3",
+    "appService.deploySubpath": "."
+}

@@ -83,10 +83,6 @@ div[data-testid="stSidebarUserContent"] div.stPageLink a:hover {
     background-color: #F1F5F9 !important;
     border-radius: 10px !important;
 }
-/* 현재 활성화된 메뉴는 연한 파란색 배경 부여 */
-div[data-testid="stSidebarUserContent"] div.stPageLink[data-testid="stPageLink-FormSubmitButton"] a {
-    /* 기본적으로 이 프레임워크는 현재 위치한 페이지 링크에 스타일 커스텀을 직접 줄 수 있습니다 */
-}
 
 /* 로고 및 작업자 영역 스타일 정의 */
 .sidebar-logo-area { margin-bottom: 30px; padding-left: 8px; }
@@ -109,7 +105,7 @@ div.logout-btn-wrap div.stButton > button {
 }
 div.logout-btn-wrap div.stButton > button:hover { border-color: #3B82F6 !important; color: #3B82F6 !important; background: #F8FAFC !important; }
 
-/* 본문 메인 디자인 코드 상속 */
+/* 本문 메인 디자인 코드 상속 */
 .main-title { font-size: 34px; font-weight: 950; color: #0F172A; margin-bottom: 6px; letter-spacing: -0.8px; }
 .sub-title { font-size: 15px; color: #475569; margin-bottom: 20px; }
 .metric-card { height: 116px; background: #FFFFFF; border: 1px solid #E4EAF3; border-radius: 16px; padding: 19px 21px; display: flex; align-items: center; gap: 18px; }
@@ -144,18 +140,18 @@ with st.sidebar:
     </div>
     """)
     
-    # [네비게이션 메뉴] - 세션 상태를 유지하는 순정 링크 컴포넌트로 전면 수정
-    # (CSS 오버라이딩 덕분에 이미지처럼 외곽 흰 상자가 생기지 않고 글자만 노출됩니다.)
+    # [네비게이션 메뉴]
     st.page_link("pages/exterior_inspection.py", label="🔍 Exterior Inspection", use_container_width=True)
     st.page_link("pages/ct_inspection.py", label="☢ CT Inspection", use_container_width=True)
     st.page_link("pages/inspection_report.py", label="📋 Inspection Report", use_container_width=True)
     
     # [작업자 정보 카드]
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    current_operator = st.session_state.get("user_id", "1")
     html(f"""
     <div class="operator-card">
         <div class="operator-title">👤 Operator</div>
-        <div class="operator-name">1</div>
+        <div class="operator-name">{current_operator}</div>
         <div class="operator-time">Access Time: {now_str}</div>
     </div>
     """)
@@ -219,16 +215,35 @@ with col_main:
             if uploaded_file:
                 st.session_state.analysis_done = True
                 
-                # 분석 이력 자동 기록부
+                # 분석 이력 자동 기록부 데이터 생성
                 now = datetime.now()
                 battery_id = f"B-{len(st.session_state.inspection_history) + 1:03d}"
+                operator_id = str(st.session_state.get("user_id", "1"))
+                
+                # 1. 화면 출력용 세션 데이터 추가
                 record = {
                     "배터리 ID": battery_id, "파일명": uploaded_file.name, "판정 결과": "불량",
                     "위험도": 82, "신뢰도": "92%", "검사 완료 시간": now.strftime("%Y-%m-%d %H:%M:%S"),
-                    "작업자": st.session_state.get("user_id", "1"), "라인": selected_line
+                    "작업자": operator_id, "라인": selected_line
                 }
                 st.session_state.inspection_history.insert(0, record)
-                save_inspection_report(battery_id=battery_id, inspection_type="외관 검사", result="불량", risk_score=82, operator="1", line=selected_line, confidence=92, defect_summary="표면 크랙 발생", recommendation="정밀 재검사필요", model_version="v1")
+                
+                # 2. 💡 utils를 통해 data/reports.csv 파일에 누적 저장 연동 완료!
+                save_inspection_report(
+                    battery_id=battery_id, 
+                    inspection_type="외관 검사", 
+                    result="불량", 
+                    risk_score=82, 
+                    operator=operator_id, 
+                    line=selected_line, 
+                    confidence=0.92,  # 비율 형태로 통일 (0.92)
+                    defect_summary="표면 크랙 발생", 
+                    recommendation="정밀 재검사 필요", 
+                    model_version="v1.0.0"
+                )
+                st.success(f"배터리 {battery_id} 분석 완료 및 CSV 기록 성공!")
+            else:
+                st.error("분석할 이미지를 업로드해 주세요.")
 
     # 뷰어 영역 출력
     image_src = uploaded_file_to_base64(uploaded_file)

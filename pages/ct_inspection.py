@@ -249,7 +249,7 @@ def save_ct_record(uploaded_file, selected_line):
         return
 
     st.session_state.ct_saved_upload_signature = file_signature
-    operator = st.session_state.get("user_id", "1")
+    operator = str(st.session_state.get("user_id", "1"))
 
     record = {
         "CT ID": ct_id,
@@ -275,6 +275,7 @@ def save_ct_record(uploaded_file, selected_line):
     st.session_state.ct_history.insert(0, record)
     st.session_state.ct_activity_logs.insert(0, log)
 
+    # 💡 비율(0.94) 및 버전을 다듬어 통합 CSV 저장 기능 정합성 완성
     save_inspection_report(
         battery_id=ct_id,
         inspection_type="CT 내부검사",
@@ -282,10 +283,10 @@ def save_ct_record(uploaded_file, selected_line):
         risk_score=76,
         operator=operator,
         line=selected_line,
-        confidence=94,
+        confidence=0.94, 
         defect_summary="전극 정렬 이상, 내부 공극 이상, 분리막 변형 의심",
         recommendation="정밀 재검사 후 셀 격리 및 원인 분석 권장",
-        model_version="CT-CNN-v1",
+        model_version="CT-CNN-v1.0.0",
     )
 
 
@@ -319,8 +320,8 @@ def render_ct_viewer(uploaded_file):
             <div class="zoom-box">
                 <span>−</span> <span>|</span> <span>100%</span> <span>＋</span> <span>|</span> <span>⛶</span>
             </div>
-            {slice_arc}
-            {defect_points}
+            {{slice_arc}}
+            {{defect_points}}
             <div class="arrow-left">‹</div>
             <div class="thumbnail-row">{thumbnails}</div>
             <div class="arrow-right">›</div>
@@ -538,10 +539,11 @@ with st.sidebar:
     
     # 작업자 카드 정의
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+    current_operator = st.session_state.get("user_id", "1")
     html(f"""
     <div class="operator-card">
         <div class="operator-title">👤 Operator</div>
-        <div class="operator-name">1</div>
+        <div class="operator-name">{current_operator}</div>
         <div class="operator-time">Access Time: {now_str}</div>
     </div>
     """)

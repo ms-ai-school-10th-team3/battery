@@ -3,7 +3,6 @@ from datetime import datetime
 
 import pandas as pd
 
-
 REPORT_DIR = "data"
 REPORT_PATH = os.path.join(REPORT_DIR, "reports.csv")
 
@@ -93,3 +92,12 @@ def save_inspection_report(
     df = df[REPORT_COLUMNS]
 
     df.to_csv(REPORT_PATH, index=False, encoding="utf-8-sig")
+
+
+# 💡 불러오기 함수 새로 추가!
+def load_inspection_reports():
+    """저장된 CSV 파일을 읽어서 DataFrame으로 반환합니다."""
+    if os.path.exists(REPORT_PATH):
+        return pd.read_csv(REPORT_PATH)
+    else:
+        return pd.DataFrame(columns=REPORT_COLUMNS)  # 파일이 없으면 빈 컬럼 틀만 반환
