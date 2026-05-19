@@ -1,0 +1,9 @@
+datset:simple
+backbone:mobilenet
+out_stride:16
+lr:0.001
+lr_scheduler:poly
+loss_type:ce
+epoch:100
+base_size:512
+crop_size:512

@@ -13,3 +13,9 @@ venv/
 # OS / editor
 .DS_Store
 .vscode/
+
+ai_models/deeplab_mobilenet/weights/
+ai_models/deeplab_mobilenet/results/
+ai_models/deeplab_mobilenet/uploads/
+ai_models/deeplab_mobilenet/test_images/
+ai_models/deeplab_mobilenet/**/__pycache__/

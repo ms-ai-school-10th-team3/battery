@@ -1,0 +1,18 @@
+# byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# backup files
+*.bak
+
+# weights
+weights/
+*.pt
+
+# testset
+testset/
+
+# log
+logs/
+*.log
