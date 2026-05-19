@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 # 1. 기본 설정
 # =========================
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 # "Exterior" 또는 "CT"
 # 외관 5K 돌릴 때: DATA_TYPE = "Exterior"
