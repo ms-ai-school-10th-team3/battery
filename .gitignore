@@ -1,29 +1,57 @@
+# =========================
 # Streamlit secrets
+# =========================
 .streamlit/secrets.toml
 
+# =========================
 # Python cache
+# =========================
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
 
+# =========================
 # Local env
+# =========================
 .env
 .venv/
 venv/
 
+# =========================
 # OS / editor
+# =========================
 .DS_Store
+Thumbs.db
 .vscode/
 
-ai_models/deeplab_mobilenet/weights/
+# =========================
+# DeepLab MobileNet outputs / temp files
+# =========================
 ai_models/deeplab_mobilenet/results/
 ai_models/deeplab_mobilenet/uploads/
 ai_models/deeplab_mobilenet/test_images/
 ai_models/deeplab_mobilenet/**/__pycache__/
 
+# weights 폴더 안 파일은 기본적으로 무시
+ai_models/deeplab_mobilenet/weights/*
+
+# 단, CT 시연용 모델 weight만 GitHub에 포함
+!ai_models/deeplab_mobilenet/weights/model_best.pth
+
+# =========================
 # Report outputs
+# =========================
 data/report_images/
 data/reports.csv
 
+# =========================
 # Model weights
+# =========================
 *.pth
 *.pt
+*.tar
+
+# 단, CT 시연용 모델 weight 예외 처리
+!ai_models/deeplab_mobilenet/weights/model_best.pth
