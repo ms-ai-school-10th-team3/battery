@@ -18,6 +18,9 @@ REPORT_COLUMNS = [
     "defect_summary",
     "recommendation",
     "model_version",
+    "image_path",
+    "heatmap_path",
+    "overlay_path",
 ]
 
 
@@ -69,6 +72,9 @@ def save_inspection_report(
     defect_summary,
     recommendation,
     model_version,
+    image_path="",
+    heatmap_path="",
+    overlay_path="",
 ):
     os.makedirs(REPORT_DIR, exist_ok=True)
 
@@ -80,7 +86,10 @@ def save_inspection_report(
         "completed_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "operator": operator,
         "line": line,
-        "confidence": confidence,
+        "confidence": round(float(confidence) * 100, 2) if float(confidence) <= 1 else round(float(confidence), 2),
+        "image_path": image_path,
+        "heatmap_path": heatmap_path,
+        "overlay_path": overlay_path,
         "defect_summary": defect_summary,
         "recommendation": recommendation,
         "model_version": model_version,

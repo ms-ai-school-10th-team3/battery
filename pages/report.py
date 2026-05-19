@@ -71,28 +71,17 @@ def load_reports() -> pd.DataFrame:
 
 
 def get_selected_report():
-    selected_battery_id = st.session_state.get("selected_battery_id")
-    selected_completed_at = st.session_state.get("selected_completed_at")
+    selected_report = st.session_state.get("selected_report")
 
-    if not selected_battery_id:
-        return None
+    if selected_report:
+        report = selected_report.copy()
 
-    df = load_reports()
+        if "completed_at" in report:
+            report["completed_at"] = pd.to_datetime(report["completed_at"], errors="coerce")
 
-    if df.empty:
-        return None
+        return report
 
-    target_df = df[df["battery_id"].astype(str) == str(selected_battery_id)]
-
-    if selected_completed_at:
-        target_df = target_df[
-            target_df["completed_at"].dt.strftime("%Y-%m-%d %H:%M") == str(selected_completed_at)
-        ]
-
-    if target_df.empty:
-        return None
-
-    return target_df.iloc[-1].to_dict()
+    return None
 
 
 def format_datetime(value):
