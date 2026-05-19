@@ -2,6 +2,7 @@ import os
 import io
 import textwrap
 from datetime import datetime, date, timedelta
+from utils import report_storage
 
 import pandas as pd
 import streamlit as st
@@ -69,10 +70,6 @@ def load_reports() -> pd.DataFrame:
     df["risk_score"] = pd.to_numeric(df["risk_score"], errors="coerce").fillna(0).astype(int)
     df["confidence"] = pd.to_numeric(df["confidence"], errors="coerce").fillna(0).astype(int)
     return df
-
-def clear_reports():
-    empty_df = pd.DataFrame(columns=REPORT_COLUMNS)
-    empty_df.to_csv(REPORT_PATH, index=False, encoding="utf-8-sig")
 
 def convert_to_excel(df):
     output = io.BytesIO()
@@ -158,7 +155,7 @@ with st.sidebar:
 # ==================================================
 st.markdown('<div class="main-title">검사 이력 및 보고서</div><div class="sub-title">데이터를 필터링하고 관리자용 보고서(CSV/Excel)를 추출합니다.</div>', unsafe_allow_html=True)
 
-reports_df = load_reports()
+reports_df = report_storage.load_reports()
 
 # Filter
 filter_box = st.container(border=True)
@@ -244,5 +241,5 @@ with d3:
     if not filtered_df.empty: st.download_button("📄 최근 검사 TXT", data=make_report_text(filtered_df.iloc[0]), file_name=f"Latest_{filtered_df.iloc[0]['battery_id']}.txt", use_container_width=True)
 with d4:
     if st.button("⚠ 전체 이력 초기화", use_container_width=True):
-        clear_reports()
+        report_storage.clear_reports()
         st.rerun()

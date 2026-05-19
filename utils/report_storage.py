@@ -39,7 +39,16 @@ def load_reports():
         if col not in df.columns:
             df[col] = ""
 
-    return df[REPORT_COLUMNS]
+    df = df[REPORT_COLUMNS]
+
+    # inspection_report.py에서 날짜 필터와 차트에 사용하므로 datetime 변환 필수
+    df["completed_at"] = pd.to_datetime(df["completed_at"], errors="coerce")
+
+    # 숫자 컬럼 변환
+    df["risk_score"] = pd.to_numeric(df["risk_score"], errors="coerce").fillna(0).astype(int)
+    df["confidence"] = pd.to_numeric(df["confidence"], errors="coerce").fillna(0).astype(int)
+
+    return df
 
 
 def get_report_by_battery_id(battery_id):
@@ -110,3 +119,9 @@ def load_inspection_reports():
         return pd.read_csv(REPORT_PATH)
     else:
         return pd.DataFrame(columns=REPORT_COLUMNS)  # 파일이 없으면 빈 컬럼 틀만 반환
+    
+def clear_reports():
+    """전체 보고서 이력 초기화"""
+    os.makedirs(REPORT_DIR, exist_ok=True)
+    empty_df = pd.DataFrame(columns=REPORT_COLUMNS)
+    empty_df.to_csv(REPORT_PATH, index=False, encoding="utf-8-sig")
