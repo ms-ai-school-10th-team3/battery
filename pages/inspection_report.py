@@ -205,24 +205,6 @@ if not filtered_df.empty:
 # =========================
 # Report Table & Drill-down
 # =========================
-@st.dialog("📋 상세 검사 리포트")
-def show_detail(row):
-    st.markdown(f"### 배터리 ID: **{row['battery_id']}**")
-    st.divider()
-    c1, c2 = st.columns(2)
-    with c1:
-        st.write(f"**검사 유형:** {row['inspection_type']}")
-        st.write(f"**최종 판정:** {row['result']}")
-        st.write(f"**위험도:** {row['risk_score']}%")
-    with c2:
-        st.write(f"**신뢰도:** {row['confidence']}%")
-        st.write(f"**라인:** {row['line']}")
-        st.write(f"**시간:** {row['completed_at'].strftime('%Y-%m-%d %H:%M')}")
-    st.write("---")
-    st.markdown("**결함 요약**")
-    st.info(row['defect_summary'])
-    st.markdown("**권장 조치**")
-    st.warning(row['recommendation'])
 
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown(f'<div class="card" style="margin-bottom:8px;"><div class="table-title">상세 검사 이력</div><div class="table-sub">행을 클릭하면 상세 내용을 조회할 수 있습니다. (조회 {total_count}건)</div></div>', unsafe_allow_html=True)
@@ -234,7 +216,16 @@ else:
     if len(event.selection["rows"]) > 0:
         selected_index = event.selection["rows"][0]
         selected_row = filtered_df.iloc[selected_index]
-        show_detail(selected_row)
+
+        selected_report = selected_row.to_dict()
+
+        if pd.notna(selected_report.get("completed_at")):
+            selected_report["completed_at"] = selected_report["completed_at"].strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            selected_report["completed_at"] = "-"
+
+        st.session_state.selected_report = selected_report
+        st.switch_page("pages/report.py")
 
 
 # =========================
