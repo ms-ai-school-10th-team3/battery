@@ -156,10 +156,6 @@ with st.sidebar:
 st.markdown('<div class="main-title">검사 이력 및 보고서</div><div class="sub-title">데이터를 필터링하고 관리자용 보고서(CSV/Excel)를 추출합니다.</div>', unsafe_allow_html=True)
 
 reports_df = report_storage.load_reports()
-st.caption(f"DEBUG REPORT PATH: {report_storage.REPORT_PATH}")
-st.caption(f"DEBUG REPORT COUNT: {len(reports_df)}")
-st.write("DEBUG RAW REPORTS")
-st.dataframe(reports_df[["battery_id", "inspection_type", "result", "completed_at", "line"]])
 
 # Filter
 filter_box = st.container(border=True)
@@ -187,9 +183,6 @@ if not filtered_df.empty:
     if search_id.strip(): filtered_df = filtered_df[filtered_df["battery_id"].str.contains(search_id, case=False, na=False)]
     filtered_df = filtered_df.sort_values("completed_at", ascending=False).reset_index(drop=True)
     
-    st.write("DEBUG FILTERED REPORTS")
-    st.caption(f"DEBUG FILTERED COUNT: {len(filtered_df)}")
-    st.dataframe(filtered_df[["battery_id", "inspection_type", "result", "completed_at", "line"]])
     
 # Metrics
 total_count = len(filtered_df)
