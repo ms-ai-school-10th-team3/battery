@@ -6,7 +6,7 @@ from datetime import datetime
 import pandas as pd
 import streamlit as st
 
-from services.custom_vision_out import predict_exterior_custom_vision
+from services.custom_vision_out import predict_exterior_ensemble
 from utils.report_storage import save_inspection_report
 
 
@@ -624,8 +624,8 @@ with main_left:
             try:
                 image_bytes = uploaded_file.getvalue()
 
-                with st.spinner("Custom Vision 외관 분석 중..."):
-                    raw_result = predict_exterior_custom_vision(image_bytes)
+                with st.spinner("Custom Vision 외관 2-stage 분석 중..."):
+                    raw_result = predict_exterior_ensemble(image_bytes)
 
                 parsed = normalize_custom_vision_result(raw_result)
 
